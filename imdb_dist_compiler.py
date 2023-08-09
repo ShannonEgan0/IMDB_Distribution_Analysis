@@ -1,6 +1,7 @@
 import pandas as pd
 import imdb_dist_scrape
 import csv
+from os import listdir
 
 data = pd.read_csv("C:\\Code\\R\\movie_titles.csv", encoding='utf8')
 titles = data['tconst']
@@ -9,6 +10,10 @@ movie_data = []
 completed = list(pd.read_csv("film_hists.csv", encoding='utf8')['tconst'])
 
 print(f"{len(titles) - len(completed)} / {len(titles)} films remaining for scraping")
+
+# Creating film_hists file if it doesn't already exist
+if "film_hists.csv" not in listdir():
+    open("film_hists.csv", 'w').close()
 
 with open("film_hists.csv", 'a') as outfile:
     writer = csv.writer(outfile)
@@ -24,6 +29,7 @@ with open("film_hists.csv", 'a') as outfile:
             else:
                 print(f"No rating data for {i} - {film_title} found, may not have been released")
 
+# Combining distribution data with existing film data from IMDB
 movie_data = pd.read_csv("film_hists.csv", encoding='utf8')
 combo = data.merge(movie_data, on='tconst', how="inner")
-combo.to_csv("test.csv")
+combo.to_csv("IMDB_distributions.csv")
