@@ -3,7 +3,6 @@ install.packages("ggplot2")
 
 library(tidyverse)
 library(ggplot2)
-library(plotly)
 
 # Specifying filters for original dataset
 vote_number <- 1039
