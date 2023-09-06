@@ -9,10 +9,15 @@ import sys
 
 # Allows sctipt to be ran from terminal with argv[1] being the film title or code
 def main():
-    title = sys.argv[1]
+    if len(sys.argv) > 0:
+        title = sys.argv[1]
+    else:
+        print("No film specified.")
+        print('Usage: "python imdb_dist_scrape.py film_title"')
+        return 0
     if not re.match(r"^tt[0-9]{4,}", title):
         title = search_title(title)
-    imdb_histogram(title, verbose=True, plot=True)
+    return imdb_histogram(title, verbose=True, plot=True)
 
 
 # Function for looking up exact titles rather than title codes

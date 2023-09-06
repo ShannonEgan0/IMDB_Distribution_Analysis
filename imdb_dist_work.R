@@ -5,44 +5,6 @@ library(tidyverse)
 library(ggplot2)
 library(plotly)
 
-
-imdb <- read.delim("IMDB Data/title_basics.tsv")
-
-imdb_vote_count <- read.delim("IMDB Data/title_ratings.tsv")
-
-# Plots the full distribution of ALL films average ratings
-# Hovers predictably at 7.5
-ggplot(data = imdb_vote_count) +
-  geom_bar(mapping=aes(x=averageRating), fill="#f5c518")
-
-summarize(imdb_vote_count, mean(numVotes), n())
-
-# Filtering the data by number of votes
-filter_imdb <- imdb_vote_count %>% 
-  filter(numVotes > 1038)
-ggplot(data = filter_imdb) +
-  geom_bar(mapping=aes(x=averageRating), fill="#f5c518")
-summarize(filter_imdb, mean(numVotes), n())
-
-# Attempting to join both data imports to have ratings alongside details
-imdb_merged <- merge(imdb, filter_imdb, by="tconst")
-summarize(imdb_merged, mean(numVotes), n())
-
-# Filtering to just films, min year and non-adult
-i <- imdb_merged %>% 
-  filter(titleType == 'movie' & startYear >= 1960 & isAdult == 0)
-summarize(i, mean(numVotes), n())
-ggplot(data = i) +
-  geom_bar(mapping=aes(x=averageRating), fill="#f5c518")
-
-
-i <- select(i, -isAdult, -endYear, -averageRating, -titleType)
-
-write.csv(i, "movie_titles.csv", fileEncoding = "UTF-8", row.names = FALSE)
-
-
-# This is where the python script should be run to scrape in the dist data
-
 # Reading the output distribution data merged with movie general data
 imdb_dists <- select(read.csv("IMDB_distributions.csv"), -X)
 
@@ -90,6 +52,15 @@ check_film <- function(title, data_table, band=0.2, plot=TRUE) {
     title <- film["primaryTitle"]
   } else {
     film <- filter(data_table, primaryTitle == title)
+  }
+  if (nrow(film) == 0) {
+    print("Title not recognized")
+    return(0)
+  }
+  else if (nrow(film) > 1) {
+    print(paste("Warning, multiple films matching this title have been",
+          "returned, the film from", t(film["startYear"])[1], "has been",
+          "plotted and returned, consider using tconst code instead."))
   }
   film <- t(film)
   
