@@ -19,7 +19,7 @@ IMDB currently offers datasets containing film details as well as mean scores, a
   <i>Distribution comparison for votes for The Promise (in yellow), compared to the expected distribution (in black)</i>
 </p>
 
-In contrast to "Alvin and the Chimpunks", the film "The Promise (2016)", a film focused on the Armenian genocide, had a vote response far from the expected distribution, with a sum of squres difference of 0.3989. Voters for this film were heavily inclined to give this film either 1, or 10 stars, which does not follow typical voting patterns for a film with this average rating.
+In contrast to "Alvin and the Chimpunks", the film "The Promise (2016)", a film focused on the Armenian genocide, had a voter response far from the expected distribution, with a sum of squres difference of 0.3989. Voters for this film were heavily inclined to give this film either 1, or 10 stars, which does not follow typical voting patterns for a film with this average rating.
 
 Provided in this repository is a python script to sequentially scrape and archive all film distributions from IMDB (from a curated list to reduce the time this would take), or just return the distribution of a particular film. Also included is an R script to calculate the expected distributions of sequential score brackets, parameterised with band width values (eg. width = 0.1, will return all bands of the form 6.9 - 7.1 etc.), then compare all films to their expected distributions using sum of squares regression.
 
