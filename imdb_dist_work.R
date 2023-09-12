@@ -81,7 +81,7 @@ check_film <- function(title, data_table, band=0.2, plot=TRUE) {
     # Subtitle Text
     sub_text <- paste("Rating:", round(mean_rating, 3), 
                       "Sum Squared Deviation:", 
-                      round(deviation, 3))
+                      format(round(deviation, 3), nsmall=4))
     
     # Add warning if dist size is low
     if (dist_size <= 1000) {
@@ -129,7 +129,8 @@ imdb_dists <- find_urs(imdb_dists)
 # Adding column to dataset comparing the weighted IMDB score to the unweighted
 # score to find films IMDB has identified as suspicious
 # Effectively introduces a "weighting" factor
-imdb_dists$weight_unweight_ratio <- abs(c["weighted_rating"] - c["mean_rating"])
+imdb_dists["weight_unweight_ratio"] <- abs(imdb_dists["weighted_rating"] - 
+                                          imdb_dists["mean_rating"])
 
 # Checking a series of progressive distributions to illustrate expected dists
 checks <- 0:43 * 0.2 + 1.2
