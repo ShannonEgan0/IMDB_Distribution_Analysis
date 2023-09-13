@@ -11,7 +11,7 @@ IMDB currently offers datasets containing film details as well as mean scores, a
 <i>Sum of Squares Voting Distribution Error = Σ(film vote proportion - expected vote proportion)²</i>
 </p>
 
-Examples of the deviation estimated using the sum of squares error are below.
+Examples of the expected vote distribution of films to their actual vote distributions are below.
 
 <p align="center">
   <img src="readme_files/Alvin and the Chipmunks.png" />
