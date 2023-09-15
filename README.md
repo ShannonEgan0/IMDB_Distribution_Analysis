@@ -55,7 +55,7 @@ Injecting a small, but appropriate amount of opinion here, it appears that this 
 
 ### Usage Details
 
-Provided in this repository is a python script to sequentially scrape and archive all film distributions from IMDB (from a curated list to reduce the time this would take), or just return the distribution of a particular film. Also included is an R script to calculate the expected distributions of sequential score brackets, parameterised with band width values (eg. width = 0.1, will return all bands of the form 6.9 - 7.1 etc.), then compare all films to their expected distributions using sum of squares regression.
+Provided in this repository is a python script to sequentially scrape and archive all film distributions from IMDB (from a curated list to reduce the time this would take), or just return the distribution of a particular film. Also included is an R script to calculate the expected distributions of films, parameterised with band width values (eg. width = 0.1, will return a distribution using average proportions from all films with an average rating ±0.1 of the target film's rating), then compare films to their expected distributions using sum of squares regression.
 
 TO BE UPDATED SOON
 
