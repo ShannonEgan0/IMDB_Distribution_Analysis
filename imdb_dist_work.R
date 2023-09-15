@@ -14,6 +14,11 @@ for (i in cols) {
   imdb_dists[i] <- imdb_dists[i] / imdb_dists["numVotes"]
 }
 
+# Adding column to dataset comparing the weighted IMDB score to the unweighted
+# score to find films IMDB has identified as suspicious
+# Effectively introduces a "weighting" factor
+imdb_dists["weight_unweight_difference"] <- abs(imdb_dists["weighted_rating"] - 
+                                             imdb_dists["mean_rating"])
 
 narrow_band <- function(data_table, value, band=0.2) {
   out <- data_table %>% 
@@ -80,8 +85,10 @@ check_film <- function(title, data_table, band=0.2, plot=TRUE) {
   if (plot) {
     # Subtitle Text
     sub_text <- paste("Rating:", round(mean_rating, 3), 
-                      "Sum Squared Deviation:", 
-                      format(round(deviation, 3), nsmall=4))
+                      "Sum of Squares Error:", 
+                      format(round(deviation, 3), nsmall=4),
+                      "Weighted Difference:",
+                      format(round(as.numeric(film[21]), 3)))
     
     # Add warning if dist size is low
     if (dist_size <= 1000) {
@@ -98,14 +105,8 @@ check_film <- function(title, data_table, band=0.2, plot=TRUE) {
       labs(title = paste("IMDB Vote Distribution Comparison for", title),
            subtitle = sub_text, x="Votes", y="% of votes at value"))
   }
-  return(deviation)
+  return(c(deviation, as.numeric(film[21])))
 }
-
-
-# Selecting film for comparison
-title <- "tt2112096"
-
-check_film(title, imdb_dists)
 
 
 # This function finds all deviations for all films in the dataset
@@ -113,7 +114,7 @@ find_urs <- function(data_table) {
   print("Finding all diff values")
   to_add <- c()
   for (i in data_table[["tconst"]]) {
-    diff <- check_film(i, data_table, plot=FALSE)
+    diff <- check_film(i, data_table, plot=FALSE)[1]
     to_add <- append(to_add, diff)
   }
   print("Finding diffs complete")
@@ -126,11 +127,9 @@ find_urs <- function(data_table) {
 # distributions for the entire dataset
 imdb_dists <- find_urs(imdb_dists)
 
-# Adding column to dataset comparing the weighted IMDB score to the unweighted
-# score to find films IMDB has identified as suspicious
-# Effectively introduces a "weighting" factor
-imdb_dists["weight_unweight_ratio"] <- abs(imdb_dists["weighted_rating"] - 
-                                          imdb_dists["mean_rating"])
+# Selecting film for comparison
+title <- "tt2112096"
+check_film(title, imdb_dists)
 
 # Checking a series of progressive distributions to illustrate expected dists
 checks <- 0:43 * 0.2 + 1.2
