@@ -51,7 +51,7 @@ The suggestion here, is that OitBBA may have engaged in vote purchasing, or perh
 
 Even more interesting, are films like Crimea (2017). I don't want to bring myself to summarise "Crimea", so the current storyline for the film on IMDB reads: "This is a story of love, faith and honor, the strength of spirit and true friendship against the backdrop of the real events of the Crimean spring of 2014.". Crimea has similar patterns as OitBBA in that there are 21,675 votes at 9 stars, but only 191 at 10 stars. As a result, it again has a very high sum squared deviation, and a very high weighted difference, suggesting IMDB's system is skeptical about the authenticity of the 9 star votes in some way.
 <br>
-Injecting a small, but appropriate amount of opinion here, it appears that this extremely blatant Russian propaganda film purchased votes at 9 stars, believing that might be clever enough to circumvent IMDB's weighting system. Or else, the many fans who loved the film at 9 stars observed some flaw that stopped them going all the way to 10, curious.
+Injecting a small, but appropriate amount of opinion here, it appears that this extremely blatant Russian propaganda film purchased votes at 9 stars, believing that might be clever enough to circumvent IMDB's weighting system (unsuccessfully). Otherwise we are forced to believe the many fans who loved the film at 9 stars observed some flaw that stopped them going all the way to 10...
 
 ### Usage Details
 
